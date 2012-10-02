@@ -3,6 +3,7 @@ OZ_DEBUG=3
 
 # (1) Add new targets here
 CENTOS = centos60_x86_64
+SCIENTIFIC6 = sl63_x86_64
 FEDORA15 = fedora15_x86_64
 FEDORA16 = fedora16_x86_64
 RHEL5 = rhel56_x86_64
@@ -22,7 +23,7 @@ ONEIRIC = ubuntu-oneiric_x86_64_60G ubuntu-oneiric_x86_64_80G \
 PRECISE = ubuntu-precise_x86_64_60G ubuntu-precise_x86_64_80G \
 		ubuntu-precise_x86_64_120G ubuntu-precise_x86_64_160G \
 		ubuntu-precise_x86_64_320G
-TARGETS = $(FEDORA15) $(FEDORA16) $(CENTOS) $(RHEL5) $(RHEL6) \
+TARGETS = $(FEDORA15) $(FEDORA16) $(CENTOS) $(SCIENTIFIC6) $(RHEL5) $(RHEL6) \
 		$(LUCID) $(MAVERICK) $(NATTY) $(ONEIRIC) $(PRECISE)
 
 # (2) Add a global buil command for the target
@@ -30,6 +31,7 @@ all:		$(TARGETS)
 fedora15:	$(FEDORA15)
 fedora16:	$(FEDORA16)
 centos:		$(CENTOS)
+scientific6:	$(SCIENTIFIC6)
 rhel5:		$(RHEL5)
 rhel6:		$(RHEL6)
 lucid:		$(LUCID)
@@ -43,6 +45,11 @@ centos-upload:	$(CENTOS)
 	@$(foreach var,$(CENTOS),make publish/$(var)-upload;)
 centos-clean:
 	@$(foreach var,$(CENTOS),make $(var)-clean;)
+
+scientific6-upload:   $(SCIENTIFIC6)
+	@$(foreach var,$(SCIENTIFIC6),make publish/$(var)-upload;)
+scientific6-clean:
+	@$(foreach var,$(SCIENTIFIC6),make $(var)-clean;)
 
 fedora-upload:
 	@make fedora15-upload
